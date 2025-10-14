@@ -51,7 +51,9 @@ def count_occurrences_with_trie(s, terms):
 
 
 if __name__ == "__main__":
-    s = "appapplebananacoconutbananaapplecoconutgrape"
+    # s = "appapplebananacoconutbananaapplecoconutgrape"
+    s = "applebananaapple"
+    return_val = "a red fruit, a yellow fruit, a red fruit"
     terms = ["apple", "banana", "coconut", "app"]
 
     result = count_occurrences_with_trie(s, terms)
