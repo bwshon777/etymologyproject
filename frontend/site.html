@@ -73,8 +73,9 @@
   <div class="container">
     <h1>Etymology Finder</h1>
     <p>Discover the roots and meanings of any word.</p>
-    <form action="result.html" method="get">
-      <input type="text" name="word" placeholder="Enter a word..." required />
+
+    <form action="/process" method="POST">
+        <input type="text" name="userInput" placeholder="Enter a word..." required />
       <br />
       <button type="submit">Search</button>
     </form>

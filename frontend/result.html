@@ -56,13 +56,17 @@
 </head>
 <body>
   <div class="result-container">
-    <h2>Results for “applebananaapple”</h2>
+    <h2>Results for "{{ input_word }}"</h2>
 
-    <div class="definition">🍎 a red fruit</div>
-    <div class="definition">🍌 a yellow fruit</div>
-    <div class="definition">🍎 a red fruit</div>
+    {% if meaning_with_repetition %}
+      {% for meaning in meaning_with_repetition %}
+        <div class="definition">{{ meaning }}</div>
+      {% endfor %}
+    {% else %}
+      <p>No morphemes found.</p>
+    {% endif %}
 
-    <form action="site.html" method="get">
+    <form action="/" method="get">
       <button type="submit">Search Another Word</button>
     </form>
   </div>

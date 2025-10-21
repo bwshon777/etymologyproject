@@ -1,6 +1,10 @@
 
 
 import json
+from flask import Flask, render_template, request
+
+app = Flask(__name__, template_folder='frontend')
+
 
 class TrieNode:
     def __init__(self):
@@ -53,20 +57,24 @@ def find_morphemes(s, terms):
 
     return found_words
 
+@app.route('/')
+def home():
+    return render_template('site.html')
 
-if __name__ == "__main__":
+
+@app.route('/process', methods=['POST'])
+def process():
+    user_input = request.form.get('userInput')  # matches the HTML input name
+    print("Received from frontend:", user_input)
+
+    # Load the morpheme data
     with open("info.json", "r") as f:
         word_data = json.load(f)
 
-    s = "appleappleappbananaappapple"
-
     terms = list(word_data.keys())
-    found_words = find_morphemes(s, terms)
+    found_words = find_morphemes(user_input, terms)
 
     meaning_with_repetition = [word_data[word] for word in found_words]
-    print(", ".join(meaning_with_repetition))
-
-
     seen = set()
     meaning_without_repetition = []
 
@@ -76,4 +84,16 @@ if __name__ == "__main__":
             seen.add(meaning)
             meaning_without_repetition.append(meaning)
 
-    print(", ".join(meaning_without_repetition))
+    # Send all of this to result.html
+    return render_template(
+        'result.html',
+        input_word=user_input,
+        meaning_with_repetition=meaning_with_repetition,
+    )
+
+
+
+
+if __name__ == "__main__":
+    app.run(debug=True)
+
