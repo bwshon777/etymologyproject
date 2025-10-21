@@ -1,3 +1,7 @@
+
+
+import json
+
 class TrieNode:
     def __init__(self):
         self.children = {}
@@ -22,18 +26,18 @@ class Trie:
         while i < len(text) and text[i] in node.children:
             node = node.children[text[i]]
             if node.is_end:
-                found_words.append(i)  # store ending index
+                found_words.append(i)
             i += 1
         return found_words
 
 
-def count_occurrences_with_trie(s, terms):
+def find_morphemes(s, terms):
     trie = Trie()
     for word in terms:
         trie.insert(word)
 
-    counts = {word: 0 for word in terms}
     word_set = set(terms)
+    found_words = []
 
     i = 0
     while i < len(s):
@@ -42,19 +46,34 @@ def count_occurrences_with_trie(s, terms):
             longest_end = endings[-1]
             word = s[i:longest_end + 1]
             if word in word_set:
-                counts[word] += 1
+                found_words.append(word)
             i = longest_end + 1
         else:
             i += 1
 
-    return counts
+    return found_words
 
 
 if __name__ == "__main__":
-    # s = "appapplebananacoconutbananaapplecoconutgrape"
-    s = "applebananaapple"
-    return_val = "a red fruit, a yellow fruit, a red fruit"
-    terms = ["apple", "banana", "coconut", "app"]
+    with open("info.json", "r") as f:
+        word_data = json.load(f)
 
-    result = count_occurrences_with_trie(s, terms)
-    print(result)
+    s = "appleappleappbananaappapple"
+
+    terms = list(word_data.keys())
+    found_words = find_morphemes(s, terms)
+
+    meaning_with_repetition = [word_data[word] for word in found_words]
+    print(", ".join(meaning_with_repetition))
+
+
+    seen = set()
+    meaning_without_repetition = []
+
+    for word in found_words:
+        meaning = word_data[word]
+        if meaning not in seen:
+            seen.add(meaning)
+            meaning_without_repetition.append(meaning)
+
+    print(", ".join(meaning_without_repetition))

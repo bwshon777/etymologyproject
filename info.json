@@ -1,1 +1,6 @@
-{"apple":  "a red fruit"}
+{
+  "apple": "a red fruit",
+  "banana": "a yellow fruit",
+  "coconut": "a tropical fruit with white flesh",
+  "app": "short for application"
+}

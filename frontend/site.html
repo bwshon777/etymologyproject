@@ -1,10 +1,85 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Etymology Finder</title>
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(135deg, #f8f9fa, #dbe9ff);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+
+    .container {
+      background: white;
+      padding: 40px;
+      border-radius: 20px;
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+      text-align: center;
+      width: 90%;
+      max-width: 450px;
+    }
+
+    h1 {
+      color: #3b3b98;
+      font-size: 2em;
+      margin-bottom: 10px;
+    }
+
+    p {
+      color: #6c757d;
+      margin-bottom: 30px;
+    }
+
+    input {
+      width: 80%;
+      padding: 12px;
+      border: 2px solid #3b3b98;
+      border-radius: 8px;
+      font-size: 1em;
+      outline: none;
+    }
+
+    button {
+      margin-top: 20px;
+      padding: 12px 30px;
+      font-size: 1em;
+      background: #3b3b98;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background 0.2s ease;
+    }
+
+    button:hover {
+      background: #2c2c77;
+    }
+
+    footer {
+      margin-top: 40px;
+      font-size: 0.85em;
+      color: #888;
+    }
+  </style>
 </head>
 <body>
+  <div class="container">
+    <h1>Etymology Finder</h1>
+    <p>Discover the roots and meanings of any word.</p>
+    <form action="result.html" method="get">
+      <input type="text" name="word" placeholder="Enter a word..." required />
+      <br />
+      <button type="submit">Search</button>
+    </form>
+  </div>
 
+  <footer>© 2025 Etymology Project</footer>
 </body>
 </html>
